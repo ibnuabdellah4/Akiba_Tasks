@@ -56,11 +56,13 @@ def identify_repeated_words(text):
             repeated.append(word)
     return repeated
 
-sample_text = "Python is useful and Python is powerful."
+sample_text = "Python is useful and and Python is powerful."
+
+vowels, consonants = count_vowels_and_consonants(sample_text)
+
 print("Sample Text:", sample_text)
 print("Word Count:", count_words(sample_text))
 print("Characters (excluding spaces):", count_characters_excluding_spaces(sample_text))
-vowels, consonants = count_vowels_and_consonants(sample_text)
 print(f"Vowels: {vowels}, Consonants: {consonants}")
 print("Longest Word:", find_longest_word(sample_text))
 print("Word Frequencies:", count_word_appearances(sample_text))
