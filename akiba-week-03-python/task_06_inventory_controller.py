@@ -1,4 +1,5 @@
 inventory = []
+
 def add_product(name, price, stock):
     if name == "":
         print("Error: Product name cannot be empty.")
