@@ -56,7 +56,7 @@ def identify_repeated_words(text):
             repeated.append(word)
     return repeated
 
-sample_text = "Python is useful and and Python is powerful."
+sample_text = "Python is useful and Python is powerful."
 
 vowels, consonants = count_vowels_and_consonants(sample_text)
 
