@@ -1,6 +1,3 @@
-# Task 4: Text Statistics and Word Analyzer
-
-
 def count_words(text):
     words = text.split()
     return len(words)
@@ -19,7 +16,7 @@ def count_vowels_and_consonants(text):
     v_count = 0
     c_count = 0
     for char in text:
-        if char.isalpha():  # checks if it's a letter
+        if char.isalpha():
             if char in vowels:
                 v_count += 1
             else:
@@ -28,12 +25,10 @@ def count_vowels_and_consonants(text):
 
 
 def find_longest_word(text):
-    # Remove basic punctuation just in case
     clean_text = text.replace(".", "").replace(",", "")
     words = clean_text.split()
     if not words:
         return ""
-
     longest = words[0]
     for word in words:
         if len(word) > len(longest):
@@ -42,7 +37,6 @@ def find_longest_word(text):
 
 
 def count_word_appearances(text):
-    # Convert to lowercase and remove basic punctuation
     clean_text = text.lower().replace(".", "").replace(",", "")
     words = clean_text.split()
 
@@ -54,7 +48,6 @@ def count_word_appearances(text):
             counts[word] = 1
     return counts
 
-
 def identify_repeated_words(text):
     counts = count_word_appearances(text)
     repeated = []
@@ -63,14 +56,11 @@ def identify_repeated_words(text):
             repeated.append(word)
     return repeated
 
-
-
 sample_text = "Python is useful and Python is powerful."
 print("Sample Text:", sample_text)
 print("Word Count:", count_words(sample_text))
 print("Characters (excluding spaces):", count_characters_excluding_spaces(sample_text))
 vowels, consonants = count_vowels_and_consonants(sample_text)
-
 print(f"Vowels: {vowels}, Consonants: {consonants}")
 print("Longest Word:", find_longest_word(sample_text))
 print("Word Frequencies:", count_word_appearances(sample_text))
