@@ -13,6 +13,34 @@ def validate_answer():
 def check_answer(user_ans, correct_ans):
     return user_ans == correct_ans
 
+def update_score(is_correct, score, incorrect):
+    if is_correct:
+        print("Correct!\n")
+        return score + 1, incorrect
+    else:
+        print("Wrong!\n")
+        return score, incorrect + 1
+
+def display_results(score, incorrect, total_questions):
+    percentage = (score / total_questions) * 100
+    print(f"""
+=== QUIZ RESULTS ===
+Correct answers: {score}
+Incorrect answers: {incorrect}
+Final Score: {percentage}%
+""")
+    
+    if percentage >= 90:
+        category = "Outstanding"
+    elif percentage >= 75:
+        category = "Good"
+    elif percentage >= 50:
+        category = "Pass"
+    else:
+        category = "Needs Improvement"
+    
+    print(f"Result Category: {category}")
+
 def run_quiz():
     questions = [
         {
@@ -44,42 +72,19 @@ def run_quiz():
     
     score = 0
     incorrect = 0
-    
+
     for q in questions:
         display_question(q)
         user_ans = validate_answer()
-        if check_answer(user_ans, q["answer"]):
-            print("Correct!\n")
-            score += 1
-        else:
-            print(f"Wrong! The correct answer was {q['answer']}.\n")
-            incorrect += 1
-            
-    total_questions = len(questions)
-    percentage = (score / total_questions) * 100
-    
-    print(f"""
-    === QUIZ RESULTS ===)
-    Correct answers: {score}
-    Incorrect answers: {incorrect}
-    Final Score: {percentage}%
-    """)
-    
-    # Challenge: Result Category
-    if percentage >= 90:
-        category = "Outstanding"
-    elif percentage >= 75:
-        category = "Good"
-    elif percentage >= 50:
-        category = "Pass"
-    else:
-        category = "Needs Improvement"
-        
-    print(f"Result Category: {category}")
+        is_correct = check_answer(user_ans, q["answer"])
+        if not is_correct:
+            print(f"The correct answer was {q['answer']}.\n")
+        score, incorrect = update_score(is_correct, score, incorrect)
+    display_results(score, incorrect, len(questions))
 
 while True:
-        run_quiz()
-        play_again = input("\nDo you want to play again? (yes/no): ").strip().lower()
-        if play_again != "yes":
-            print("Thanks for playing!")
-            break
+    run_quiz()
+    play_again = input("\nDo you want to play again? (yes/no): ").strip().lower()
+    if play_again != "yes":
+        print("Thanks for playing!")
+        break
